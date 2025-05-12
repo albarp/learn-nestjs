@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  learn-nestjs:
+    image: learn-nestjs:0.0.1
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - TEST=aaaa
+    volumes:
+      - ../src:/workspace:cached
+    command: sleep infinity
