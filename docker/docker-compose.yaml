@@ -10,5 +10,5 @@ services:
     environment:
       - TEST=aaaa
     volumes:
-      - ../src:/workspace:cached
+      - ..:/workspace
     command: sleep infinity
