@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   HttpCode,
@@ -8,6 +9,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { CreatePetDto } from './dto/create-pet.dto';
 
 @Controller('pets')
 export class PetsController {
@@ -24,7 +26,7 @@ export class PetsController {
 
   @Post()
   @HttpCode(201) // the default
-  create(): string {
-    return 'this creates a pet';
+  create(@Body() createPetDto: CreatePetDto): string {
+    return `this creates a pet ${createPetDto.name}`;
   }
 }
