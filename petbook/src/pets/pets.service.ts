@@ -15,6 +15,10 @@ export class PetsService {
     return this.pets;
   }
 
+  findOne(id: number): Pet | undefined {
+    return this.pets.find((p) => p.id === id);
+  }
+
   private getNextId(): number {
     const numericIds = this.pets
       .map((pet) => pet.id)

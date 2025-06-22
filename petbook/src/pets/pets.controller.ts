@@ -6,6 +6,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   /*Query,
   Req,*/
@@ -46,9 +47,17 @@ export class PetsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): string {
-    console.log(id);
-    return `this action returns pet # ${id}`;
+  findOne(@Param('id', ParseIntPipe) id: number): Pet {
+    const pet = this.petsService.findOne(id);
+
+    if (pet === undefined) {
+      throw new HttpException(
+        `pet with id ${id} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return pet;
   }
 
   @Post()
