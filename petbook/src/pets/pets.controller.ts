@@ -9,9 +9,11 @@ import {
   Post,
   Query,
   Req,
+  UseFilters,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CreatePetDto } from './dto/create-pet.dto';
+import { HttpExceptionFilter } from 'src/http-exception.filter';
 
 @Controller('pets')
 export class PetsController {
@@ -26,7 +28,15 @@ export class PetsController {
 
   @Get('error')
   throwErrorr() {
-    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    // throw new HttpException({ msg: 'custom message' }, HttpStatus.FORBIDDEN);
+    throw new HttpException('message', HttpStatus.FORBIDDEN);
+  }
+
+  @Get('filterError')
+  @UseFilters(HttpExceptionFilter) // It can be at action, controller or global level
+  filterError() {
+    // this is ignore as the response mmessage is built by the HttpExceptionFilter
+    throw new HttpException('message', HttpStatus.FORBIDDEN);
   }
 
   @Get(':id')
