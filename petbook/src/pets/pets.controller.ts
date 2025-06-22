@@ -22,6 +22,12 @@ export class PetsController {
     return `This action returns all cats for path: ${request.path} with type: ${type} and age: ${age}`;
   }
 
+  /*@Get()
+  findAllPlatformSpecific(@Res({ passthrough: true }) res: Response) {
+    res.status(HttpStatus.OK); // access platform (Express/Fastify) objects, not recomended
+    return [];
+  }*/
+
   @Get(':id')
   findOne(@Param('id') id: string): string {
     console.log(id);
