@@ -7,23 +7,28 @@ import {
   HttpStatus,
   Param,
   Post,
-  Query,
-  Req,
+  /*Query,
+  Req,*/
   UseFilters,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { PetsService } from './pets.service';
+import { Pet } from './interfaces/pet.interface';
 
 @Controller('pets')
 export class PetsController {
+  constructor(private petsService: PetsService) {}
+
   @Get()
-  findAll(
-    @Req() request: Request,
+  // eslint-disable-next-line prettier/prettier
+  findAll( /*@Req() request: Request,
     @Query('type') type: string,
-    @Query('age') age: number,
-  ): string {
-    return `This action returns all cats for path: ${request.path} with type: ${type} and age: ${age}`;
+    @Query('age') age: number,*/
+  // eslint-disable-next-line prettier/prettier
+  ): Pet[] {
+    return this.petsService.findAll();
   }
 
   @Get('error')
@@ -47,8 +52,8 @@ export class PetsController {
 
   @Post()
   @HttpCode(201) // the default
-  create(@Body() createPetDto: CreatePetDto): string {
-    return `this creates a pet ${createPetDto.name}`;
+  create(@Body() createPetDto: CreatePetDto) {
+    this.petsService.create(createPetDto);
   }
 
   /*@Get()
