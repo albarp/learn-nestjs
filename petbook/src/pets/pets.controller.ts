@@ -25,6 +25,6 @@ export class PetsController {
   @Post()
   @HttpCode(201) // the default
   create(): string {
-    return 'this creates a cat';
+    return 'this creates a pet';
   }
 }
