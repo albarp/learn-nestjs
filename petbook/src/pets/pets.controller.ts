@@ -16,6 +16,7 @@ import { CreatePetDto } from './dto/create-pet.dto';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
 import { PetsService } from './pets.service';
 import { Pet } from './interfaces/pet.interface';
+import { PetMapper } from './pet.mapper';
 
 @Controller('pets')
 export class PetsController {
@@ -53,7 +54,7 @@ export class PetsController {
   @Post()
   @HttpCode(201) // the default
   create(@Body() createPetDto: CreatePetDto) {
-    this.petsService.create(createPetDto);
+    this.petsService.create(PetMapper.toDomain(createPetDto));
   }
 
   /*@Get()
