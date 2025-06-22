@@ -14,8 +14,12 @@ import { CreatePetDto } from './dto/create-pet.dto';
 @Controller('pets')
 export class PetsController {
   @Get()
-  findAll(@Req() request: Request, @Query('type') type: string): string {
-    return `This action returns all cats for path: ${request.path} and key: ${type}`;
+  findAll(
+    @Req() request: Request,
+    @Query('type') type: string,
+    @Query('age') age: number,
+  ): string {
+    return `This action returns all cats for path: ${request.path} with type: ${type} and age: ${age}`;
   }
 
   @Get(':id')
