@@ -3,6 +3,8 @@ import {
   Controller,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Query,
@@ -22,11 +24,10 @@ export class PetsController {
     return `This action returns all cats for path: ${request.path} with type: ${type} and age: ${age}`;
   }
 
-  /*@Get()
-  findAllPlatformSpecific(@Res({ passthrough: true }) res: Response) {
-    res.status(HttpStatus.OK); // access platform (Express/Fastify) objects, not recomended
-    return [];
-  }*/
+  @Get('error')
+  throwErrorr() {
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string): string {
@@ -39,4 +40,10 @@ export class PetsController {
   create(@Body() createPetDto: CreatePetDto): string {
     return `this creates a pet ${createPetDto.name}`;
   }
+
+  /*@Get()
+  findAllPlatformSpecific(@Res({ passthrough: true }) res: Response) {
+    res.status(HttpStatus.OK); // access platform (Express/Fastify) objects, not recomended
+    return [];
+  }*/
 }
