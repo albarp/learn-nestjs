@@ -11,7 +11,9 @@ export class PetsService {
     this.pets.push(pet);
   }
 
-  findAll(): Pet[] {
+  findAll(type: string, age: number): Pet[] {
+    console.log(type);
+    console.log(age);
     return this.pets;
   }
 

@@ -7,3 +7,10 @@ export class LoggerMiddleware implements NestMiddleware {
     next();
   }
 }
+
+/* si upuò anche definire una funzione singola da poi passare al metodo apply del modulo app
+export function logger(req: Request, res: Response, next: NextFunction) {
+  console.log('Request...');
+  next();
+}
+*/

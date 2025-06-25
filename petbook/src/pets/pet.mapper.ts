@@ -6,6 +6,8 @@ export class PetMapper {
     return {
       id: null,
       name: dto.name,
+      age: dto.age,
+      type: dto.type,
     };
   }
 }
